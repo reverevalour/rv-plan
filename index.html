@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#0b0c0f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="RV Plan" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>RV Plan</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">PERSONAL PLANNER</div>
+        <h1>RV Plan</h1>
+      </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="Налаштування">⚙︎</button>
+    </header>
+
+    <section class="quick-add card">
+      <div class="input-wrap">
+        <textarea id="quickInput" rows="2" placeholder="Напр.: Завтра о 9:00 подзвонити Марку про Sprinter"></textarea>
+        <button id="micBtn" class="mic-btn" aria-label="Голосове введення">🎙</button>
+      </div>
+      <div class="quick-actions">
+        <select id="categorySelect" aria-label="Категорія">
+          <option value="auto">Авто-категорія</option>
+          <option value="RVMOVE">RVMOVE</option>
+          <option value="Revere Valour">Revere Valour</option>
+          <option value="Documents">Documents</option>
+          <option value="Personal">Personal</option>
+        </select>
+        <button id="addBtn" class="primary">Додати</button>
+      </div>
+      <div id="voiceHint" class="hint"></div>
+    </section>
+
+    <nav class="tabs" aria-label="Період">
+      <button class="tab active" data-view="today">Сьогодні</button>
+      <button class="tab" data-view="tomorrow">Завтра</button>
+      <button class="tab" data-view="later">Пізніше</button>
+      <button class="tab" data-view="all">Усі</button>
+    </nav>
+
+    <section class="summary-row">
+      <div class="summary-pill"><span id="openCount">0</span> активних</div>
+      <div class="summary-pill"><span id="doneCount">0</span> виконано</div>
+    </section>
+
+    <main id="taskList" class="task-list"></main>
+
+    <section id="emptyState" class="empty card hidden">
+      <div class="empty-icon">✓</div>
+      <h2>Тут чисто</h2>
+      <p>Додай справу текстом або голосом.</p>
+    </section>
+
+    <footer>
+      <span>RV Plan · local-first</span>
+      <button id="backupBtn" class="link-btn">Резервна копія</button>
+    </footer>
+  </div>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card">
+      <div class="dialog-head">
+        <h2>Налаштування</h2>
+        <button class="icon-btn" value="cancel" aria-label="Закрити">✕</button>
+      </div>
+      <label class="setting-row">
+        <span><strong>Сповіщення</strong><small>Працюють, поки RV Plan активний. Повний фоновий push додамо після підключення сервера.</small></span>
+        <button type="button" id="notifyBtn" class="secondary">Увімкнути</button>
+      </label>
+      <label class="setting-row block">
+        <span><strong>Тестове сповіщення</strong><small>Перевірити дозвіл на iPhone.</small></span>
+        <button type="button" id="testNotifyBtn" class="secondary">Надіслати тест</button>
+      </label>
+      <label class="setting-row block">
+        <span><strong>Дані</strong><small>У v0.1 усі задачі зберігаються тільки на цьому пристрої.</small></span>
+        <button type="button" id="clearDoneBtn" class="secondary danger">Очистити виконані</button>
+      </label>
+    </form>
+  </dialog>
+
+  <input id="importFile" type="file" accept="application/json" hidden />
+  <script src="app.js"></script>
+</body>
+</html>
